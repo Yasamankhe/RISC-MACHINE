@@ -15,40 +15,6 @@ input write, clk;  // write  is our load here if it's 1 the load input of writen
 output [15:0] data_out; // when we are reading 
 
 
-// how the code should work :
-
-//                        TO WRITE
-//1.Suppose we want ?j? to have the value 42 before we start executing our code. 
-//2.To put 42 in R3 you would place the 16-bit value 0000000000101010 (binary for 42) on data_in,
-//3. set the 3-bit input writenum to 011 (binary for 3), 
-//4.set write to 1 to indicate we wish to save, or write, the value 42 into location 3 in theregister file, and input a rising edge on clk.
-
-// This causes, the output of the upper 3:8 decoder to be driven to
-//00001000. Each output bit of the decoder is AND?ed with write. As write is 1, the load input to R3 is set
-//to 1. On the rising edge of clk 0000000000101010 will be copied to the 16-bit Q output of R3
-
-//                        TO READ
-//To read, the value of ?j?, which is in R3, we set the 3-bit bus readnum to 011. The 8-bit output of the
-//lower 3:8 decoder will be 00001000 and this will cause the 8-input one-hot select mux to copy the value of
-//R3 to data_out.
-
-
-//This register file has two ports: one write port and one read port.  // 2 always block  only one clock dependant  
-
-
-// The read is combinational: whenever readnum changes, the value from the indicated register is driven out of the register file after some combinational delay.
-//THE REGISTER READS ARE NOT COORDINATED TO THE CLOCK! 
-
-
-//The register write, however, is coordinated to the clock. At each rising clock edge, 
-//if write is 1, the value on the 16-bit register file input data_in is written into the register indicated by the value on writenum. 
-
-//This write only happens on the rising clock edge. 
-//If,at the clock edge, write is 0, no register is updated. 
-
-//To be compatible with the autograder, your register file must contain signals named R0, R1, R2, R3, R4, R5, R6, R7
-
-
 
 
 
